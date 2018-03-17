@@ -1,0 +1,4 @@
+.gsConfigManager
+.DS_Store
+/export-*
+*.pyc
