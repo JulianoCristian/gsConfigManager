@@ -1,11 +1,11 @@
 # Auth
 # The idea behind this script is to store the credentails
 # Then to only make new requests for X-GSAccessTokens as needed.
-# When reconfiguring have cache on values already there
 
 import os
 import sys
 import json
+import time
 import requests
 
 authUrl = 'https://auth.gamesparks.net/restv2/auth'
@@ -46,10 +46,6 @@ def get_configured_apikey():
 def get_configured_credentials ():
     return open_json_file(credentailsPath)
 
-def get_gs_access_token_from_file (filename):
-    credentials = export.read_file()
-    accessToken = gamesparks.get_gs_access_token(username, password)
-
 def request_gs_access_token (username, password):
     url = authUrl + '/user'
     res = requests.get(url, auth=requests.auth.HTTPBasicAuth(username, password))
@@ -65,7 +61,11 @@ def get_gs_jwt_token_request ():
     return res.json()['X-GS-JWT']
 
 def get_gs_access_token ():
-    # Check has token in auth, check token not expired yet
+    if check_path(authPath):
+        t = open_json_file(authPath)
+        if t['expiresAt']/1000 - time.time() > 0:
+            return t['X-GSAccessToken']
+    
     has_configured_credentials()
     c = get_configured_credentials()
     t = request_gs_access_token(c['username'], c['password'])

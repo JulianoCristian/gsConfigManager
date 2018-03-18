@@ -17,13 +17,14 @@ def fail_with_error (msg):
     sys.exit()
 
 def print_help (filename):
-    print(filename + ' usage guide.')
-    print(filename + ' configure -- Configure Credentails.')
-    print(filename + ' help -- Print this help screen.')
-
-# Grep for bad words
-# Should Store Credentails in config file
-# Should only auth when needed not each request
+    print('--- ' + filename + ' usage guide.')
+    print('--- Configure and Help')
+    print(' - ' + filename + ' configure -- Configure Credentails.')
+    print(' - ' + filename + ' help -- Print this help screen.')
+    print('--- Export Options')
+    print(' - ' + filename + ' exportScripts -- Export Scrpts')
+    print(' - ' + filename + ' exportManagementSnapshot -- Export the Management Screens')
+    print(' - ' + filename + ' exportAll -- Export the entire current configuration')
 
 # Main
 if len(sys.argv) <= 1 or sys.argv[1] == 'help':
@@ -55,4 +56,4 @@ else:
     elif sys.argv[1] == 'exportAll':
         export.export_all(auth.get_configured_apikey(), auth.get_gs_access_token())
     else:
-        fail_with_error('Invalid Operation')
+        print_help(sys.argv[0])

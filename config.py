@@ -1,5 +1,6 @@
 # Config
 
+import sys
 import requests
 
 configUrl = 'https://config2.gamesparks.net'
