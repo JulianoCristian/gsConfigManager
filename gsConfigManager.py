@@ -19,7 +19,9 @@ def fail_with_error (msg):
 def print_help (filename):
     print('--- ' + filename + ' usage guide.')
     print('--- Configure and Help')
-    print(' - ' + filename + ' configure -- Configure Credentails.')
+    print(' - ' + filename + ' configure')
+    print(' - ' + filename + ' configApi -- Configure ApiKey.')
+    print(' - ' + filename + ' configAuth -- Configure Credentails.')
     print(' - ' + filename + ' help -- Print this help screen.')
     print('--- Export Options')
     print(' - ' + filename + ' exportScripts -- Export Scrpts')
@@ -32,6 +34,12 @@ if len(sys.argv) <= 1 or sys.argv[1] == 'help':
 
 elif sys.argv[1] == 'configure':
     auth.configure()
+
+elif sys.argv[1] == 'configApi':
+    auth.configureApi()
+
+elif sys.argv[1] == 'configAuth':
+    auth.configureAuth()
 
 elif sys.argv[1] == 'sanitize':
     print('Sanitize not yet implemented.')

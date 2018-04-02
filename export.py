@@ -4,6 +4,8 @@ import os
 import json
 import config
 
+basePath = 'export/'
+
 def check_path(path):
     if not os.path.exists(os.path.dirname(path)):
         os.makedirs(os.path.dirname(path))
@@ -21,7 +23,7 @@ def export_scripts (apiKey, gs_access_token):
     print('Exporting ' + apiKey + ' scripts.')
     scripts = config.get_scripts(apiKey, gs_access_token)
     for i in range(len(scripts)):
-        filename = 'export-' + apiKey + '/Scripts/' + scripts[i]['type'] + '/' + scripts[i]['name'] + '.js'
+        filename = basePath + 'export-' + apiKey + '/Scripts/' + scripts[i]['type'] + '/' + scripts[i]['name'] + '.js'
         write_file(filename, scripts[i]['script'])
 
 def export_management_snapshot (apiKey, gs_access_token):
@@ -29,7 +31,7 @@ def export_management_snapshot (apiKey, gs_access_token):
     snippets = config.get_management_snippets(apiKey, gs_access_token)
     for i in range(len(snippets)):
         snippet = config.get_management_snippet(apiKey, snippets[i]['shortCode'], gs_access_token)
-        filename = 'export-' + apiKey + '/Manage/' + snippets[i]['shortCode'] + '.json'
+        filename = basePath + 'export-' + apiKey + '/Manage/' + snippets[i]['shortCode'] + '.json'
         write_json_file(filename, snippet)
 
 def export_all (apiKey, gs_access_token):

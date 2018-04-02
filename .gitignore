@@ -1,4 +1,5 @@
-.gsConfigManager
 .DS_Store
-/export-*
 *.pyc
+
+.gsConfigManager
+/export/*
